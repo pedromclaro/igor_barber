@@ -1,73 +1,453 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbearia do Igor</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="style.css">
+    <title>Barbearia Igor | Corte Precision</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --preto: #1D1D1F;
+            --branco: #FFFFFF;
+            --cinza: #F5F5F7;
+            --vermelho: #FF453A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background: var(--branco);
+            color: var(--preto);
+            line-height: 1.6;
+            padding-bottom: 120px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.97), rgba(255,255,255,0.97)),
+                        url('https://images.unsplash.com/photo-1587909209111-5097ee578ec3') center/cover;
+            border-bottom: 1px solid #EEE;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Botão Principal */
+        .btn-agendar {
+            background: var(--vermelho);
+            color: var(--branco);
+            padding: 1.2rem 2.5rem;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 2rem auto 0;
+            width: 240px;
+        }
+
+        .btn-agendar:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Seção de Serviços */
+        .servicos {
+            padding: 8rem 2rem;
+        }
+
+        .servico-item {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 0;
+            border-bottom: 1px solid #EEE;
+        }
+
+        .servico-item:last-child {
+            border-bottom: none;
+        }
+
+        .servico-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .servico-emoji {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            background: var(--cinza);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .servico-detalhes h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .servico-detalhes p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Botão Saiba Mais */
+        .btn-saiba-mais {
+            background: var(--cinza);
+            color: var(--preto);
+            border: 1px solid #EEE;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-saiba-mais:hover {
+            background: #EEE;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--branco);
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: modalOpen 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--preto);
+            padding: 0.5rem;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #EEE;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .modal p {
+            margin: 1rem 0;
+            color: #666;
+        }
+
+        @keyframes modalOpen {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Seção Contato */
+        .contato {
+            padding: 8rem 2rem;
+            text-align: center;
+            background: var(--cinza);
+            border-top: 1px solid #EEE;
+        }
+
+        .contato h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--preto);
+        }
+
+        .contato p {
+            color: #666;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 1rem;
+        }
+
+        /* Link WhatsApp */
+        .whatsapp-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--preto);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid #EEE;
+            background: var(--branco);
+            margin-top: 1.5rem;
+        }
+
+        .whatsapp-link:hover {
+            background: #f8f8f8;
+            transform: translateY(-1px);
+        }
+
+        .whatsapp-link i {
+            color: #25D366;
+        }
+
+        /* Navegação */
+        .nav-bottom {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #EEE;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--preto);
+            padding: 12px;
+            transition: 0.3s;
+        }
+
+        .nav-item.active {
+            color: var(--vermelho);
+        }
+
+        .nav-item i {
+            font-size: 1.4rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-item span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .servico-item {
+                padding: 2rem 0;
+            }
+        }
+    </style>
 </head>
 <body>
-
     <main>
-        <section id="principal">
-            <div id="principal-about">
-                <h1>Olá 👋, bem-vindo a<br><strong id="pedro">Barbearia do Igor</strong></h1>
-                <p class="sobre"></p>O corte que te faz sentir bem.</p>
-                <a href="https://calendar.app.google/LEcYnRCgTGYaC2WJ9" target="_blank"><button>Agendar um horário →</button></a>
-            </div>
-           <!-- 
-           <div id="img-links">
-                <div id="contato">
-                    <a href="https://github.com/pedromclaro" target="_blank" style="color: #000;"><i class='bx bxl-github bx-md'></i></a>
-                    <a href="https://linkedin.com/in/pedroamclaro" target="_blank" style="color: #000;"><i class='bx bxl-linkedin bx-md' ></i></a>
-                    <a href="mailto: p3dro4fons0@outlook.com" style="color: #000;"><i class='bx bxs-envelope bx-md' ></i></a>
-                </div>
-           </div>
-           -->
+        <section class="hero">
+            <h1>Barbearia Igor<span style="color: var(--vermelho);">✂️</span></h1>
+            <p>Precisão cirúrgica no corte & experiência premium</p>
+            <button class="btn-agendar">
+                <i class="fas fa-calendar-check"></i>
+                Agendar Corte
+            </button>
         </section>
-        <!---->
-        <div class="about">
-            <div class="about-text">
-                <h2>🏗️ Site em Construção!</h2>
-                <br>
-                <p>Bem-vindo à versão alpha do nosso sistema de agendamento online! Esta é uma versão inicial, ainda em desenvolvimento, mas já permite que você agende seu horário de forma rápida e fácil. 😁</p>
-            </div>
-            <!--
-            <div class="about-text">
-                <h2>🏗️ Projetos</h2>
-                <br>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores ducimus optio delectus! Illo blanditiis doloremque odio eos aliquid, perspiciatis, aperiam neque aliquam saepe soluta dolorem tempora quam necessitatibus culpa reprehenderit! Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores ducimus optio delectus! Illo blanditiis doloremque odio eos aliquid, perspiciatis, aperiam neque aliquam saepe soluta dolorem tempora quam necessitatibus culpa reprehenderit!</p>
+
+        <section class="servicos">
+            <div class="servico-item">
+                <div class="servico-header">
+                    <div class="servico-emoji">✂️</div>
+                    <div class="servico-detalhes">
+                        <h3>Corte Precision</h3>
+                        <p>Técnicas avançadas com equipamentos profissionais</p>
+                        <button class="btn-saiba-mais" data-modal="modalCorte">
+                            Saiba Mais 
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
 
+            <div class="servico-item">
+                <div class="servico-header">
+                    <div class="servico-emoji">🧔♂️</div>
+                    <div class="servico-detalhes">
+                        <h3>Tratamento de Barba</h3>
+                        <p>Modelagem 3D + hidratação premium</p>
+                        <button class="btn-saiba-mais" data-modal="modalBarba">
+                            Saiba Mais 
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
 
+            <div class="servico-item">
+                <div class="servico-header">
+                    <div class="servico-emoji">💎</div>
+                    <div class="servico-detalhes">
+                        <h3>Pacote Completo</h3>
+                        <p>Corte + barba + tratamento capilar</p>
+                        <button class="btn-saiba-mais" data-modal="modalPacote">
+                            Saiba Mais 
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="contato">
+            <h2>Visite Nossa Casa</h2>
+            <p>Rua da Precisão, 1950 - São Paulo</p>
+            <p>Seg-Sex: 9h-20h • Sáb: 9h-14h</p>
             
-            <div class="header">
-                <h4>Posts Recentes</h4>
-                <a href="https://blog.pedromclaro.com" target="_blank">Ver todos</a>
+            <div style="margin: 3rem 0;">
+                <button class="btn-agendar">
+                    <i class="fas fa-calendar-check"></i>
+                    Agendar Corte
+                </button>
             </div>
-            <div class="posts">
-                <div class="post-item">
-                    <h3>O Software Livre que Arrecadou mais de $6MI</h3>
-                    <div class="info">
-                        <h5>11 Dez 2023</h5>
-                        <h5><i class="posts-tag-3">Notícias</i></h5>
-                    </div>
-                    <p>Thunderbird é um software de e-mail gratuito e de código aberto que funciona como cliente de e-mails. Me esbarrei com o relatório financeiro de 2022 deles e as doações passaram de 6 milhões de dólares, como isso foi possível?</p>
-                    <button><a href="https://blog.pedromclaro.com/posts/o-software-livre-que-arrecadou-mais-de-6-milhoes-de-dolares.html" target="_blank" style="color: #fff; text-decoration: none;">Ler mais →</a></button>
-                </div>
-                <div class="post-item">
-                    <h3>Definição de Software Livre e Código Aberto</h3>
-                    <div class="info">
-                        <h5>27 Nov 2023</h5>
-                        <h5><i class="posts-tag-2">Programação</i></h5>
-                    </div>
-                    <p>No mundo da programação, nos deparamos com vários projetos que são chamados de open-source, ou seja, que têm o seu código-fonte aberto e disponível para qualquer pessoa. Qual é a diferença entre open-source e software livre? O que significa exatamente ser open-source?</p>
-                    <button><a href="https://blog.pedromclaro.com/posts/definicao-de-software-livre-e-codigo-aberto.html" target="_blank" style="color: #fff; text-decoration: none;">Ler mais →</a></button>
-                </div>
-            </div>
-            --> 
-        </div>
+
+            <a href="#" class="whatsapp-link">
+                <i class="fab fa-whatsapp"></i>
+                Agende pelo WhatsApp
+            </a>
+        </section>
     </main>
+
+    <!-- Modais -->
+    <div id="modalCorte" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h3>✂️ Corte Precision</h3>
+            </div>
+            <p><strong>Detalhes:</strong> Técnicas com tesouras japonesas + finalização a navalha</p>
+            <p><strong>Duração:</strong> 45 minutos</p>
+            <p><strong>Investimento:</strong> R$ 120,00</p>
+        </div>
+    </div>
+
+    <div id="modalBarba" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h3>🧔♂️ Tratamento de Barba</h3>
+            </div>
+            <p><strong>Detalhes:</strong> Modelagem 3D + hidratação com óleos naturais</p>
+            <p><strong>Duração:</strong> 30 minutos</p>
+            <p><strong>Investimento:</strong> R$ 80,00</p>
+        </div>
+    </div>
+
+    <div id="modalPacote" class="modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-header">
+                <h3>💎 Pacote Completo</h3>
+            </div>
+            <p><strong>Detalhes:</strong> Corte premium + barba + máscara capilar</p>
+            <p><strong>Duração:</strong> 1h30</p>
+            <p><strong>Investimento:</strong> R$ 170,00</p>
+        </div>
+    </div>
+
+    <nav class="nav-bottom">
+        <a href="#servicos" class="nav-item">
+            <i class="fas fa-cut"></i>
+            <span>Serviços</span>
+        </a>
+        
+        <a href="#" class="nav-item active">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Agendar</span>
+        </a>
+        
+        <a href="#contato" class="nav-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Local</span>
+        </a>
+    </nav>
+
+    <script>
+        // Controle dos Modais
+        document.querySelectorAll('.btn-saiba-mais').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const modalId = btn.dataset.modal;
+                document.getElementById(modalId).style.display = 'flex';
+            });
+        });
+
+        document.querySelectorAll('.modal-close, .modal').forEach(element => {
+            element.addEventListener('click', (e) => {
+                if(e.target === element || e.target.classList.contains('modal-close')) {
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        modal.style.display = 'none';
+                    });
+                }
+            });
+        });
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal').forEach(modal => {
+                    modal.style.display = 'none';
+                });
+            }
+        });
+    </script>
 </body>
 </html>
